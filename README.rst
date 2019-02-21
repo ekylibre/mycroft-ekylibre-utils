@@ -39,3 +39,16 @@ To install the package, simply:
 .. code-block:: bash
 
     $ pip install mycroft-ekylibre-utils
+
+Mycroft settings
+----------------
+
+This package works with a custom config section in your :code:`mycroft.conf` file:
+
+.. code-block:: json
+
+    "ekylibre_api": {
+        "host": "yourfarm.ekylibre.farm",
+        "user": "you@example.org",
+        "password": "*******"
+    }
