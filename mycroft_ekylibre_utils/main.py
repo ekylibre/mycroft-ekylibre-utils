@@ -14,11 +14,15 @@ class EkylibreApi:
 
     def __init__(self):
         self.config_api = ConfigurationManager.get().get("ekylibre_api")
-        self.url = self.config_api.get('url')
+        self.url = "https://{host}/api/v1/".format(host=self.config_api.get('host'))
         self.user = self.config_api.get('user')
         self.password = self.config_api.get('password')
-        self.token = self.config_api.get('token')
+        # self.token = self.config_api.get('token')
         self.session = requests.Session()
+        # if self.host:
+        #     self.session.headers.update({'Host': self.host})
+        # self.session.mount("https://", TlsAdapter())
+        # self.session.verify = False
         self.auth = None
         self.get_token()
 
@@ -51,12 +55,13 @@ class EkylibreApi:
         return r.json()
 
     def get_token(self):
-        LOG.info("GET TOKEN (simple_token={})".format(self.auth))
+        LOG.info("GET TOKEN")
         try:
             endpoint = self.url + "tokens"
             payload = {'email': self.user, 'password': self.password}
 
             r = self.session.post(endpoint, data=payload)
+            r.encoding = 'utf-8'
             LOG.info("response " + r.text)
 
             if r.status_code == requests.codes.ok:
