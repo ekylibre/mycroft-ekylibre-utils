@@ -5,7 +5,7 @@ with open('README.rst', encoding='utf-8') as f:
 
 setup(
     name='mycroft-ekylibre-utils',
-    version='0.7',
+    version='0.9',
     packages=find_packages(),
     url='http://github.com/ekylibre',
     author='Ekylibre',
